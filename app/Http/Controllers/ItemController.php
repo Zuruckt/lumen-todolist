@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Item;
 use App\Repositories\ItemRepository;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class ItemController extends Controller
     /**
      * @var ItemRepository
      */
-    private $repository;
+    private ItemRepository $repository;
 
     /**
      * ItemController constructor.
@@ -32,10 +33,28 @@ class ItemController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'due_date' => 'required|date|after:now'
+            'title' => 'required',
+            'description' => 'required',
+            'due_date' => 'required|date|after:now',
+            'done' => 'sometimes|boolean'
         ]);
 
         return $this->repository->createItem($request->all());
     }
+
+    public function update(Request $request, int $id)
+    {
+        $this->validate($request, [
+            'due_date' => 'sometimes|date|after:now',
+            'done' => 'sometimes|boolean'
+        ]);
+
+        return $this->repository->updateItem($request->all(), $id);
+    }
+
+    public function delete(int $id)
+    {
+        return $this->repository->deleteItem($id);
+    }
+
 }

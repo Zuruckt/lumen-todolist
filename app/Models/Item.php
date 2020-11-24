@@ -10,7 +10,8 @@ class Item extends Model
 
     protected $fillable = [
         'user_id',
-        'name',
+        'title',
+        'description',
         'due_date',
         'done'
     ];
@@ -24,10 +25,5 @@ class Item extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    protected function markAsDone($id)
-    {
-
     }
 }

@@ -16,15 +16,15 @@
 $router->group(['prefix' => 'users'], function () use ($router) {
     $router->post('/login', 'AuthController@login');
     $router->post('/logout', 'AuthController@logout');
-    $router->post('/me', 'AuthController@me');
-    $router->post('/refresh', 'AuthController@refresh');
+    $router->get('/me', 'AuthController@me');
+    $router->get('/refresh', 'AuthController@refresh');
     $router->post('/register', 'AuthController@register');
 });
-
-
 
 $router->group(['prefix' => 'items'], function () use ($router) {
     $router->get('/', 'ItemController@index');
     $router->post('/', 'ItemController@create');
+    $router->put('/{id}', 'ItemController@update');
+    $router->delete('/{id}', 'ItemController@delete');
 });
 
