@@ -13,7 +13,7 @@ class AuthRepository
     /**
      * @var User
      */
-    private $model;
+    private User $model;
 
     /**
      * AuthRepository constructor.
@@ -46,7 +46,7 @@ class AuthRepository
 
     public function refresh()
     {
-        $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(auth()->refresh());
     }
 
     public function me()
@@ -54,7 +54,7 @@ class AuthRepository
         return auth()->user();
     }
 
-    private function respondWithToken($token)
+    private function respondWithToken(string $token)
     {
         return response()->json([
             'access_token' => $token,
