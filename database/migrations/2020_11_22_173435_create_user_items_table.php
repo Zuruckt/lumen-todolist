@@ -11,7 +11,8 @@ class CreateUserItemsTable extends Migration
         Schema::create('user_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('name');
+            $table->string('title');
+            $table->text('description');
             $table->dateTime('due_date');
             $table->boolean('done')->default(false);
         });
